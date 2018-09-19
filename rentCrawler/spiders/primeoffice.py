@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from lxml import html
-import pudb
-pudb.set_trace()
+# import pudb
+# pudb.set_trace()
 
 # Define Website Paring Configuration
 END = 148
-END = 10
 
-HEAD = "http://www.primeoffice.com.hk/rent-office-"
+HEAD1 = "http://www.primeoffice.com.hk/rent-office-"
+HEAD = "http://www.primeoffice.com.hk/zh/rent-office-"
 TAIL = ".html?pvc_ids[]=522,523,524,525,573,528,17,552,670,530,689,680,531,533,561,563,538,535,536,602,596,541,0,%20522,%20523,%20524,%20525,%20573,%20528,%2017,%20552,%20670,%20530,%20689,%20680,%20531,%20533,%20561,%20563,%20538,%20535,%20536,%20602,%20596,%20541&size_fr=&size_to=&lease_fr=&lease_to=&sale_fr=&sale_to=&view1=&view2=&view3=&view4=&view5=&deco_fullyfitted=&deco_partialfitted=&deco_ceiling=&deco_ceilingcarpet=&deco_bareshell=&aircon_central=&aircon_independent=&et="
+
 CONFIG = {
     'pages': ['(//a[@class="netvigate"]/text())[last]'],
     'results':'//div[@class="divbox"]',
@@ -46,7 +47,7 @@ def fetch_dict(CONFIG, item, _selector):
 
 class PrimeofficeSpider(scrapy.Spider):
     def __init__(self):
-        self.output = "primeoffice.jl"
+        self.output = "primeoffice_chinease.jl"
     name = 'primeoffice'
     allowed_domains = ['primeoffice.com']
 
