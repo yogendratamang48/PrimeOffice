@@ -20,8 +20,10 @@ def extract_digit(element):
         element = 0.0
     return element
 
-FILE = 'centanet.jl'
+#FILE = 'centanet.jl'
+FILE = 'midland.jl'
+_FILE = 'midland.csv'
 df_en = pd.read_json(FILE, lines=True)
 df_en['area'] = df_en['area'].apply(lambda x: extract_digit(x))
-df_en['price'] = df_en['rent'].apply(lambda x: 1000000*extract_digit(x))
-df_en.to_csv("centanet.csv", encoding="utf-8")
+df_en['price'] = df_en['price'].apply(lambda x: extract_digit(x))
+df_en.to_csv(_FILE, encoding="utf-8")
