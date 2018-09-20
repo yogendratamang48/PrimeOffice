@@ -14,6 +14,7 @@ HEAD = "http://oir.centanet.com/office/result?postType=rent&distIds="
 HEAD1 = "http://oir.centanet.com/office/ptresult?postType=rent&distIDs=129,1,4,51,140,2,3,53,49,9,60,63,58,52,57,54,62,55,59,61,24&floor=0&minPrice=20000&priceType=total&pageIndex="
 TAIL = "&priceType=total&minPrice=20000&pageIndex="
 _TEST_ID = 1
+CAT_FILE = 'configs/kln.config'
 CONFIG = {
     'pages':'//div[@class="inputDiv"]/input/@max',
     'results':'//div[contains(@class,"list-iso property")]',
@@ -81,7 +82,7 @@ class CentanetSpider(scrapy.Spider):
     start_urls = ['http://centanet.com/']
 
     def start_requests(self):
-        _ids, _locations, _names = get_url_cat('configs/catsInfo.txt')
+        _ids, _locations, _names = get_url_cat(CAT_FILE)
         for _id, _loc, _name in zip(_ids, _locations, _names):
             item = {}
             url = HEAD + str(_id)+TAIL+str(0)
@@ -98,6 +99,8 @@ class CentanetSpider(scrapy.Spider):
         if len(total_pages)>0:
             total_pages = extract_digit(total_pages[0])
             total_pages += 1
+        else:
+            total_pages = 0
         for page in range(0, total_pages):
             item = dict(_item)
             url = HEAD + item["_id"]+TAIL+str(page)
